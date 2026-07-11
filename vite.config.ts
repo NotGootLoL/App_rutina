@@ -13,13 +13,15 @@ export default defineConfig(() => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      hmmr: process.env.DISABLE_HMR !== 'true',
+      hmr: process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
-    // 🛠️ AGREGAMOS ESTO PARA SOLUCIONAR EL ERROR DE MIME TYPE EN GITHUB PAGES:
+    // 🛠️ LA SOLUCIÓN DEFINITIVA: Forzar a Vite a capturar el punto de entrada de AI Studio
     build: {
       rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+        },
         output: {
           entryFileNames: 'assets/[name].js',
           chunkFileNames: 'assets/[name].js',
