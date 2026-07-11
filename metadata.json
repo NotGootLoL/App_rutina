@@ -1,0 +1,6 @@
+{
+  "name": "Temporizador de Entrenamiento",
+  "description": "PWA de entrenamiento personal que carga rutinas desde Excel (.xlsx) y funciona de forma local con alertas de audio nativas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
