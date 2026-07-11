@@ -3,24 +3,10 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/App_rutina/',
-  plugins: [
-    react(), 
-    tailwindcss(),
-    // 🛠️ INYECTOR FORZADO DE SCRIPT PARA GITHUB PAGES
-    {
-      name: 'force-html-script',
-      transformIndexHtml(html) {
-        // Borramos cualquier etiqueta script rebelde que use .tsx
-        const cleanHtml = html.replace(/<script.*?>.*?<\/script>/gi, '');
-        // Inyectamos al final del body el script de producción real con la ruta base correcta
-        return cleanHtml.replace(
-          '</body>',
-          '<script type="module" src="/App_rutina/assets/main.js"></script></body>'
-        );
-      }
-    }
-  ],
+  // 🛠️ Al usar './' en la base, obligamos a Vite a adaptar todas las rutas 
+  // del HTML final de forma relativa al repositorio, sin importar dónde se despliegue
+  base: './', 
+  plugins: [react(), tailwindcss()],
   server: {
     hmr: process.env.DISABLE_HMR !== 'true',
     watch: process.env.DISABLE_HMR === 'true' ? null : {},
